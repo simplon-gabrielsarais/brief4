@@ -11,7 +11,7 @@ resource "azurerm_linux_virtual_machine_scale_set" "vmss_app" {
   location            = azurerm_resource_group.rg.location
   sku                 = "Standard_F2"
   instances           = 1
-  admin_username      = "adminuser"
+  admin_username      = "superman"
 
   admin_ssh_key {
     username   = "superman"
