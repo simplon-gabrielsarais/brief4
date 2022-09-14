@@ -6,5 +6,4 @@ while ($i -lt $r)
     curl -F                                         #dog
     curl -F                                         #cat
     $i++
-
 }
