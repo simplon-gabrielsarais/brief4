@@ -6,8 +6,8 @@ variable "location" {
   default = "westus"
 }
 
-variable "subdomain" {
-  default = "votingapp-${var.rg}"
+variable "subdomain-prefix" {
+  default = "votingapp"
 }
 
 data "cloudinit_config" "cloud-init" {

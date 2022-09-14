@@ -10,8 +10,8 @@ resource "azurerm_public_ip" "public_ip_gateway" {
   location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
   allocation_method   = "Static"
-  sku = "Standard"
-  domain_name_label = var.subdomain
+  sku                 = "Standard"
+  domain_name_label   = "${lower(var.subdomain-prefix)}-${lower(var.rg)}"
 }
 
 resource "azurerm_application_gateway" "gateway" {
@@ -74,4 +74,8 @@ resource "azurerm_network_interface_application_gateway_backend_address_pool_ass
  network_interface_id    = azurerm_network_interface.nic_app.id
  ip_configuration_name   = "nic_app_config"
  backend_address_pool_id = tolist(azurerm_application_gateway.gateway.backend_address_pool).0.id
+}
+
+output "application-address" {
+  value = "http://${azurerm_public_ip.public_ip_gateway.fqdn}"
 }
