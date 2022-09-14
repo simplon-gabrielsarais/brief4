@@ -7,7 +7,7 @@ variable "location" {
 }
 
 variable "subdomain" {
-  default = "votingapp"
+  default = "votingapp-${var.rg}"
 }
 
 data "cloudinit_config" "cloud-init" {
