@@ -7,7 +7,7 @@ resource "azurerm_monitor_action_group" "group-monitor" {
 resource "azurerm_monitor_metric_alert" "alert-vm-cpu" {
  name                = "alert-vm-cpu"
  resource_group_name = azurerm_resource_group.rg.name
- scopes              = [azurerm_linux_virtual_machine.vm_app.id]
+ scopes              = [azurerm_linux_virtual_machine_scale_set.vmss_app.id]
  description         = "VM App cpu alert"
  target_resource_type = "Microsoft.Compute/virtualMachines"
 
