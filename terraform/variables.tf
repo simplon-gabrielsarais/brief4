@@ -1,5 +1,5 @@
 variable "rg" {
-  default = "S1"
+  default = "testchargeg2"
 }
 
 variable "location" {
@@ -7,7 +7,7 @@ variable "location" {
 }
 
 variable "subdomain-prefix" {
-  default = "votingapp"
+  default = "votingappg2"
 }
 
 data "cloudinit_config" "cloud-init" {
