@@ -70,11 +70,11 @@ resource "azurerm_application_gateway" "gateway" {
  }
 }
 
-resource "azurerm_network_interface_application_gateway_backend_address_pool_association" "poolbackend" {
- network_interface_id    = azurerm_network_interface.nic_app.id
- ip_configuration_name   = "nic_app_config"
- backend_address_pool_id = tolist(azurerm_application_gateway.gateway.backend_address_pool).0.id
-}
+# resource "azurerm_network_interface_application_gateway_backend_address_pool_association" "poolbackend" {
+#  network_interface_id    = azurerm_network_interface.nic_app.id
+#  ip_configuration_name   = "nic_app_config"
+#  backend_address_pool_id = tolist(azurerm_application_gateway.gateway.backend_address_pool).0.id
+# }
 
 output "application-address" {
   value = "http://${azurerm_public_ip.public_ip_gateway.fqdn}"
