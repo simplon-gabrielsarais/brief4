@@ -9,10 +9,10 @@ resource "azurerm_monitor_metric_alert" "alert-vm-cpu" {
  resource_group_name = azurerm_resource_group.rg.name
  scopes              = [azurerm_linux_virtual_machine_scale_set.vmss_app.id]
  description         = "VM App cpu alert"
- target_resource_type = "Microsoft.Compute/virtualMachines"
+ target_resource_type = "Microsoft.Compute/virtualMachineScaleSets"
 
  criteria {
-   metric_namespace = "Microsoft.Compute/virtualMachines"
+   metric_namespace = "Microsoft.Compute/virtualMachineScaleSets"
    metric_name      = "Percentage CPU"
    aggregation      = "Total"
    operator         = "GreaterThan"

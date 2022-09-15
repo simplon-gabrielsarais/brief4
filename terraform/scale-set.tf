@@ -5,17 +5,17 @@ resource "azurerm_subnet" "subnet_app" {
   address_prefixes     = ["10.0.2.0/24"]
 }
 
-resource "azurerm_network_interface" "nic_app" {
-  name                = "nic_app"
-  location            = azurerm_resource_group.rg.location
-  resource_group_name = azurerm_resource_group.rg.name
+# resource "azurerm_network_interface" "nic_app" {
+#   name                = "nic_app"
+#   location            = azurerm_resource_group.rg.location
+#   resource_group_name = azurerm_resource_group.rg.name
 
-  ip_configuration {
-    name                          = "nic_app_config"
-    subnet_id                     = azurerm_subnet.subnet_app.id
-    private_ip_address_allocation = "Dynamic"
-  }
-}
+#   ip_configuration {
+#     name                          = "nic_app_config"
+#     subnet_id                     = azurerm_subnet.subnet_app.id
+#     private_ip_address_allocation = "Dynamic"
+#   }
+# }
 
 
 
@@ -25,7 +25,6 @@ resource "azurerm_linux_virtual_machine_scale_set" "vmss_app" {
   location            = azurerm_resource_group.rg.location
   sku                 = "Standard_E2d_v4"
   instances           = 1
-  admin_username      = "superman"
 
   # admin_ssh_key {
   #   username   = "superman"
@@ -57,6 +56,7 @@ resource "azurerm_linux_virtual_machine_scale_set" "vmss_app" {
       name      = "nic_app_config"
       primary   = true
       subnet_id = azurerm_subnet.subnet_app.id
+      application_gateway_backend_address_pool_ids = azurerm_application_gateway.gateway.backend_address_pool.id
     }
   }
 }
