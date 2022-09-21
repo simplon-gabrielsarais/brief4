@@ -56,7 +56,7 @@ resource "azurerm_linux_virtual_machine_scale_set" "vmss_app" {
       name      = "nic_app_config"
       primary   = true
       subnet_id = azurerm_subnet.subnet_app.id
-      application_gateway_backend_address_pool_ids = azurerm_application_gateway.gateway.backend_address_pool.id
+      application_gateway_backend_address_pool_ids = tolist(azurerm_application_gateway.gateway.backend_address_pool).*.id
     }
   }
 }
