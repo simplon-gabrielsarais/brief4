@@ -96,11 +96,33 @@ resource "azurerm_monitor_autoscale_setting" "mon_auto_scl" {
         cooldown  = "PT1M"
       }
     }
+   
+    rule {
+      metric_trigger {
+        metric_name        = "Percentage CPU"
+        metric_resource_id = azurerm_linux_virtual_machine_scale_set.vmss_app.id
+        time_grain         = "PT1M"
+        statistic          = "Average"
+        time_window        = "PT5M"
+        time_aggregation   = "Average"
+        operator           = "LessThan"
+        threshold          = 25
+      }
+
+      scale_action {
+        direction = "Decrease"
+        type      = "ChangeCount"
+        value     = "1"
+        cooldown  = "PT1M"
+      }
+    }
 
   }
 
   notification {
     email {
+      send_to_subscription_administrator    = true
+      send_to_subscription_co_administrator = true
       custom_emails                         = ["sarais.gabriel@gmail.com","alain.caupin@gmail.com","bstewart.ext@simplon.co","asawaya.ext@simplon.co"]
     }
   }
